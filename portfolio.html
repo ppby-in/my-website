@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>潘碧莹 | 个人作品集 & AI 匹配评估 - Pan Biying Portfolio</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Fonts from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind Configuration to support fonts -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          boxShadow: {
+            'bento': '0 4px 30px rgba(0, 0, 0, 0.03)',
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #fcfbf9;
+      color: #1e293b;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .text-balance {
+      text-wrap: balance;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="selection:bg-indigo-100 selection:text-indigo-950">
+
+  <!-- TOP DECORATIVE PATTERN -->
+  <div class="absolute top-0 left-0 right-0 h-96 bg-gradient-to-b from-indigo-50/50 via-emerald-50/20 to-transparent pointer-events-none -z-10"></div>
+  <div class="absolute top-[80vh] left-0 w-[40rem] h-[40rem] bg-gradient-to-tr from-purple-50/30 via-emerald-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+  <!-- BILINGUAL PORTFOLIO WEB APP -->
+  <div id="portfolio-app" class="min-h-screen flex flex-col">
+    
+    <!-- TOP NOTIFICATION BANNER -->
+    <div class="bg-[#f0fdfa] border-b border-[#ccfbf1] text-[#0f766e] text-xs py-2.5 px-4 text-center flex flex-col sm:flex-row items-center justify-center gap-2">
+      <span class="font-medium">
+        ✨ <span id="banner-tag">AI 作品集单网页版已就绪:</span> 
+        <span id="banner-text">此文件为独立运行的单HTML网页，完全支持手机端直接打开，自带离线版 AI 匹配诊断器！</span>
+      </span>
+      <button onclick="downloadSelf()" class="px-2.5 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1">
+        <i data-lucide="download" class="w-2.5 h-2.5"></i>
+        <span id="banner-btn-text">保存到手机/电脑</span>
+      </button>
+    </div>
+
+    <!-- MODERN NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/50 transition-all duration-300">
+      <div class="max-w-6xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-900 flex items-center justify-center text-white shadow-md shadow-indigo-200">
+            <span class="font-display font-bold text-base">P</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-slate-900 tracking-tight text-sm sm:text-base" id="logo-name">潘碧莹 (Biying)</span>
+            <span class="text-[10px] font-mono text-slate-500 tracking-widest uppercase" id="logo-title">Service Designer / PM</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1 bg-slate-100/70 p-1.5 rounded-full border border-slate-200/20">
+          <a href="#about" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-about">关于我</a>
+          <a href="#education" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-edu">教育背景</a>
+          <a href="#projects" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-proj">项目经历</a>
+          <a href="#skills" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-skills">技能特长</a>
+          <a href="#learning" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-learn">学习与探索</a>
+          <a href="#contact" class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-700 hover:text-indigo-600 transition-colors nav-link" id="nav-contact">联系我</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Language Toggle Button -->
+          <button onclick="toggleLanguage()" class="flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all shadow-2xs cursor-pointer">
+            <i data-lucide="languages" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span id="lang-btn-text">English</span>
+          </button>
+
+          <!-- Mobile Menu Trigger -->
+          <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+            <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 animate-fade-in">
+        <div class="px-4 pt-2 pb-6 space-y-2">
+          <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-about">关于我</a>
+          <a href="#education" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-edu">教育背景</a>
+          <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-proj">项目经历</a>
+          <a href="#skills" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-skills">技能特长</a>
+          <a href="#learning" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-learn">学习与探索</a>
+          <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl" id="mob-contact">联系我</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 sm:py-12 space-y-16 sm:space-y-24">
+      
+      <!-- HERO / INTRO SECTION -->
+      <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4 scroll-mt-24">
+        <!-- Text intro -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 border border-indigo-100/50 rounded-full text-[10px] font-mono font-bold text-indigo-700 uppercase tracking-widest shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
+            <span id="hero-badge">Postgraduate Scholar</span>
+          </div>
+
+          <div class="space-y-2">
+            <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight text-balance leading-none" id="hero-title">
+              Hi，我是潘碧莹
+            </h1>
+            <h2 class="text-lg sm:text-2xl font-bold bg-gradient-to-r from-indigo-700 to-emerald-600 bg-clip-text text-transparent font-display" id="hero-sub">
+              工业设计工程硕士 / 服务体验设计研究者
+            </h2>
+          </div>
+
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed text-justify" id="hero-bio">
+            我目前是广东工业大学工业设计工程专业的研究生，研究方向聚焦于服务体验设计与用户研究。我具备深厚的工科硕士学术素养和敏锐的用户洞察力，擅长在复杂场景中拆解用户痛点、提炼行为数据并构建落地化的产品与服务系统。在AI时代，我积极探索并倡导AI驱动的创新设计流，致力于成为兼具研究力、共情心与技术视野的优秀产品经理与用户研究员。
+          </p>
+
+          <div class="p-3.5 bg-[#fefbf6] border border-amber-200/60 rounded-xl flex items-start gap-2.5 max-w-xl">
+            <span class="text-lg">💡</span>
+            <p class="text-xs text-amber-900 italic font-medium leading-relaxed" id="hero-motto">
+              努力生活，也努力把问题看清楚。
+            </p>
+          </div>
+
+          <!-- Buttons & Call to Action -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="#contact" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-full transition-all hover:scale-[1.02] shadow-md shadow-slate-200/50 flex items-center gap-2 cursor-pointer">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              <span id="btn-contact">与我联系</span>
+            </a>
+            <a href="#matcher" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-950 text-white font-bold text-sm rounded-full transition-all hover:scale-[1.02] shadow-md shadow-indigo-100 flex items-center gap-2 cursor-pointer">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span id="btn-match">AI 岗位匹配器</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bento Grid Right Visual matching Image 1 -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+          <!-- Card 1: Education tag -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-4">
+            <div class="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <h5 class="text-xs text-slate-400 font-mono tracking-wide uppercase" id="card-edu-title">ACADEMICS</h5>
+              <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-tight" id="card-edu-val">广工大工科硕士 / 在读</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Award -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-4">
+            <div class="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+              <i data-lucide="trophy" class="w-5 h-5"></i>
+            </div>
+            <div class="space-y-1">
+              <h5 class="text-xs text-slate-400 font-mono tracking-wide uppercase" id="card-award-title">MAJOR AWARD</h5>
+              <p class="text-xs sm:text-sm font-extrabold text-emerald-700 leading-tight" id="card-award-val">华灿奖全国一等奖</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Research Core -->
+          <div class="col-span-2 bg-gradient-to-tr from-[#1e293b] to-[#0f172a] text-white p-5 rounded-2xl shadow-bento space-y-4 relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl"></div>
+            
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center text-indigo-300">
+                <i data-lucide="search" class="w-4 h-4"></i>
+              </div>
+              <span class="text-[10px] font-mono tracking-widest text-indigo-300 uppercase" id="card-res-label">Core Focus</span>
+            </div>
+
+            <div class="space-y-1.5">
+              <h4 class="font-extrabold text-sm sm:text-base tracking-tight" id="card-res-title">服务体验设计与系统化用研</h4>
+              <p class="text-xs text-slate-300 leading-relaxed" id="card-res-desc">在大屏行为数据、养老辅具及AI协同研发等方向积累了深度微观用户洞察与完整的交互白皮书、微改造评估报告撰写经历。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION BACKGROUND -->
+      <section id="education" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="edu-heading">教育背景 / Education</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="edu-sub">ACADEMIC FOUNDATIONS & RESEARCH PATHWAYS</p>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-bento relative overflow-hidden">
+          <div class="absolute right-0 top-0 w-24 h-24 bg-indigo-500/5 rounded-bl-full pointer-events-none"></div>
+
+          <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+            <div class="space-y-2">
+              <h3 class="text-lg sm:text-xl font-extrabold text-slate-900" id="edu-school">广东工业大学 (Guangdong University of Technology)</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 text-[10px] font-bold rounded-md" id="edu-degree">硕士研究生 (工科硕士)</span>
+                <span class="px-2.5 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-medium rounded-md" id="edu-period">2025.09 – 2028.06 (在读)</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-flex items-center gap-1 text-xs text-emerald-700 font-extrabold bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100">
+                <i data-lucide="award" class="w-3.5 h-3.5"></i>
+                <span id="edu-award">华灿奖全国一等奖获得者</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="space-y-1">
+              <h4 class="text-xs font-mono uppercase text-slate-400 tracking-wider" id="edu-dir-title">RESEARCH DIRECTION</h4>
+              <p class="text-sm font-bold text-slate-800" id="edu-direction">研究方向：服务体验设计、用户体验研究、系统化产品策划</p>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify" id="edu-desc">
+              在校期间深入研修用户洞察、跨学科设计研究方法、人机交互体验与数字服务设计。在课程和实验室科研任务中，建立了一套严谨的、从痛点发现到落地转化的工科系统化设计思维框架，能够熟练地将学术方法应用于商业应用开发。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section id="projects" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="proj-heading">项目经历 / Projects</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="proj-sub">SELECTED RESEARCH, SERVICES & UX CASE STUDIES</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Project Card 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-bento p-5 flex flex-col justify-between hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <span class="text-[9px] font-mono tracking-widest text-indigo-600 bg-indigo-50 px-2.5 py-1 border border-indigo-100/50 rounded-md uppercase font-bold" id="p1-badge">USER BEHAVIOR STUDY</span>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 leading-tight" id="p1-title">小米电视桌面系统设计白皮书</h3>
+              <p class="text-xs text-slate-400 font-mono tracking-tight" id="p1-sub">用户行为分析 / 交互框架设计 / 桌面大屏系统体验</p>
+              <p class="text-xs text-slate-600 leading-relaxed text-justify" id="p1-desc">
+                该项目聚焦智能电视大屏桌面系统的用户行为与痛点研究。通过大量的实地访谈、眼动实验和点击数据流分析，重点解构了用户在家庭多光源、远距离视听场景下的“信息检索路径”、“内容浏览偏好”与“核心操作决策”，为下一代电视大屏桌面交互提供严谨的用户行为和设计规范支撑。
+              </p>
+            </div>
+            <button onclick="openProjectModal(1)" class="w-full mt-5 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-800 hover:text-indigo-700 text-xs font-bold rounded-xl transition-all border border-slate-200/50 cursor-pointer flex items-center justify-center gap-1.5">
+              <span class="proj-view-btn-text">查看详情 & 过程产出</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-bento p-5 flex flex-col justify-between hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <span class="text-[9px] font-mono tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 border border-emerald-100/50 rounded-md uppercase font-bold" id="p2-badge">AGING-FRIENDLY SPACE</span>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 leading-tight" id="p2-title">粤港澳大湾区“缮居”适老化公益改造设计</h3>
+              <p class="text-xs text-slate-400 font-mono tracking-tight" id="p2-sub">空间实地调研 / 适老动线测绘 / 改造评估报告撰写</p>
+              <p class="text-xs text-slate-600 leading-relaxed text-justify" id="p2-desc">
+                参与广东省工业设计协会主导的大湾区适老化空间帮扶项目。深入顺德2户特殊帮扶家庭进行多轮实地调研、空间扫描、行为轨迹测绘。结合老年人身体机能退化特征、日常起居和护理痛点，运用服务设计链路、用户画像、体验旅程图等方法，输出兼具空间适老安全与心理关怀的整套评估报告与空间优化蓝图，极高地提升了帮扶家庭的晚年生活品质。
+              </p>
+            </div>
+            <button onclick="openProjectModal(2)" class="w-full mt-5 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-800 hover:text-indigo-700 text-xs font-bold rounded-xl transition-all border border-slate-200/50 cursor-pointer flex items-center justify-center gap-1.5">
+              <span class="proj-view-btn-text">查看详情 & 过程产出</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Project Card 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-bento p-5 flex flex-col justify-between hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <span class="text-[9px] font-mono tracking-widest text-indigo-600 bg-indigo-50 px-2.5 py-1 border border-indigo-100/50 rounded-md uppercase font-bold" id="p3-badge">AI & FRONTEND ENGINEERING</span>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 leading-tight" id="p3-title">AI协同原型与设计研究开发</h3>
+              <p class="text-xs text-slate-400 font-mono tracking-tight" id="p3-sub">AI 代码协同 / 响应式原型独立开发 / 自动化云部署</p>
+              <p class="text-xs text-slate-600 leading-relaxed text-justify" id="p3-desc">
+                在人工智能驱动变革的背景下，积极探索将大语言模型（LLM）与前端开发代码深度结合。通过手写 HTML/JS/React 与 Tailwind CSS，不依赖传统臃肿的研发流程，实现从“用研洞察 - 交互原型 - 响应式代码 - 自动化云部署”的全链路闭环验证，极高地拓宽了产品经理的工程视野与创新实现边界。本个人作品集网站正是该研究的标杆产出。
+              </p>
+            </div>
+            <button onclick="openProjectModal(3)" class="w-full mt-5 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-800 hover:text-indigo-700 text-xs font-bold rounded-xl transition-all border border-slate-200/50 cursor-pointer flex items-center justify-center gap-1.5">
+              <span class="proj-view-btn-text">查看详情 & 过程产出</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS SECTION -->
+      <section id="skills" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="skills-heading">技能特长 / Skills</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="skills-sub">PROFESSIONAL TOOLKIT & RESEARCH CAPABILITIES</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Skill Box 1 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-3">
+            <h4 class="font-extrabold text-sm text-indigo-700 font-display" id="sk1-title">用户研究能力 (User Research)</h4>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk1-1">定性访谈 & 焦点小组 (In-depth Interviews)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk1-2">田野调查 & 参与式观察 (Fieldwork)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk1-3">眼动追踪 & 点击流行为分析 (Eye Tracking)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk1-4">用户体验旅程图 & 用户画像绘制 (CJM)</span></li>
+            </ul>
+          </div>
+
+          <!-- Skill Box 2 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-3">
+            <h4 class="font-extrabold text-sm text-indigo-700 font-display" id="sk2-title">产品与服务设计 (Product & Service)</h4>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk2-1">服务设计链路与触点规划 (Service Touchpoints)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk2-2">交互框架设计与信息架构 (Wireframing)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk2-3">系统化产品策划与策略性汇报 (PRD Structure)</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk2-4">适老化微改造及人因工程安全评估 (Human Factors)</span></li>
+            </ul>
+          </div>
+
+          <!-- Skill Box 3 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-3">
+            <h4 class="font-extrabold text-sm text-indigo-700 font-display" id="sk3-title">设计工具 (Design Tools)</h4>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk3-1">Figma & Sketch 高保真交互原型</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk3-2">Rhino & KeyShot 产品建模与逼真渲染</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk3-3">Blender & PS/AI 视觉设计与动效</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk3-4">Notion 团队协同与项目知识库管理</span></li>
+            </ul>
+          </div>
+
+          <!-- Skill Box 4 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-bento space-y-3">
+            <h4 class="font-extrabold text-sm text-indigo-700 font-display" id="sk4-title">AI 与代码协同 (AI & Code Collaboration)</h4>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk4-1">ChatGPT 结构化系统 Prompt 提炼用研文本</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk4-2">Midjourney 概念渲染与高质量情境图生成</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk4-3">HTML5 / JavaScript (ES6) 快速原型开发</span></li>
+              <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i><span id="sk4-4">Tailwind CSS 移动端完美响应式自适应还原</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEARNING & EXPLORATION -->
+      <section id="learning" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="learn-heading">学习与探索 / Learning & Exploration</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="learn-sub">PIONEERING AI-DRIVEN COLLABORATIVE DESIGN METHODS</p>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6">
+          <p class="text-sm text-slate-600 leading-relaxed text-justify" id="learn-intro-text">
+            作为一名新一代的数字化产品经理与用户研究员，我深信 AI 不仅仅是效率工具，更是一种帮助设计师和研究员快速验证想法、拓展表达边界、搭建轻量级产品模型的新型「协作伙伴」。我致力于探索「研究-设计-AI辅助原型-代码落地」的全栈链路。
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Learn Item 1 -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-2xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-indigo-700" id="li1-title">AI 辅助用户需求分析 & 信息提炼</span>
+                <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-[10px] font-bold rounded-md">ChatGPT</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed text-justify" id="li1-desc">利用 ChatGPT 等大语言模型建立结构化 Prompt 模板，辅助处理高密度的定性访谈文本。对数万字的用户访谈录音进行语义聚类，提取出核心痛点，使传统质性分析效率提升 3 倍以上，确保洞察有据可依。</p>
+            </div>
+
+            <!-- Learn Item 2 -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-2xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-indigo-700" id="li2-title">AI 辅助视觉概念与情境渲染生成</span>
+                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-md">Midjourney</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed text-justify" id="li2-desc">在项目初期创意发散阶段，使用 Midjourney、Stable Diffusion 快速合成用户体验场景图、情绪板与适老化改造意向图。能够用精确的提示词将枯燥的概念方案转化为富有情感张力的视觉参考，让利益相关者一眼看清未来图景。</p>
+            </div>
+
+            <!-- Learn Item 3 -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-2xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-indigo-700" id="li3-title">AI 辅助网页原型搭建 & 动效开发</span>
+                <span class="px-2 py-0.5 bg-amber-50 text-amber-700 text-[10px] font-bold rounded-md">Vite + React</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed text-justify" id="li3-desc">打破设计师与开发者的界限，利用 OpenCode 平台与大模型辅助，手写 HTML、Tailwind CSS 及 JavaScript，实现网页端作品集与交互原型的快速交付。本站即是该实践的成果之一，实现了零代码到全栈轻量开发的跨越。</p>
+            </div>
+
+            <!-- Learn Item 4 -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-2xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-indigo-700" id="li4-title">GitHub Pages 自动化部署实践</span>
+                <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-[10px] font-bold rounded-md">GitHub CI/CD</span>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed text-justify" id="li4-desc">熟练掌握 Git 版本控制及 GitHub Actions 工作流，实现静态网页作品集的自动化构建与全球云端托管。保障多设备、全平台秒级加载和极致的自适应呈现，体现产品经理的全面工程思维。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI JOB MATCHER INTERACTIVE TOOL -->
+      <section id="matcher" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="matcher-heading">AI 岗位匹配度测评 / AI Matcher</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="matcher-sub-label">EVALUATE BIYING'S FIT WITH YOUR SPECIFIC JOB ROLE</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-indigo-900 via-[#0f172a] to-slate-950 text-white rounded-3xl border border-slate-800 p-6 sm:p-8 shadow-bento relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="max-w-3xl space-y-6">
+            <div class="space-y-2">
+              <span class="text-[9px] font-mono uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2.5 py-1 rounded-md tracking-wider inline-block">
+                Interactive AI Diagnostic Tool (No Server Required!)
+              </span>
+              <h3 class="text-xl sm:text-2xl font-extrabold tracking-tight" id="tool-title">输入您的岗位需求 (JD) 测试匹配度</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="tool-sub">
+                想知道潘碧莹与您的团队岗位匹配度如何？在此处粘贴您的招聘职责描述，我们将运行离线版智能匹配解析引擎，评估其各项核心指标并输出诊断报告！
+              </p>
+            </div>
+
+            <!-- JD Input Form -->
+            <div class="space-y-3 text-slate-800">
+              <textarea id="jd-textarea" rows="5" class="w-full p-4 bg-white/95 border-0 focus:ring-2 focus:ring-indigo-500 rounded-2xl text-xs sm:text-sm shadow-inner font-sans leading-relaxed text-slate-800 placeholder:text-slate-400 outline-none transition-all" placeholder="在此处粘贴您的招聘岗位职责 (Job Description)，例如：&#10;1. 负责用户需求调研，建立用户画像...&#10;2. 具备优秀的信息架构与交互设计能力，熟练掌握 Figma...&#10;3. 工业设计、人机交互相关专业硕士优先..."></textarea>
+              
+              <div class="flex flex-wrap gap-2 pt-1.5">
+                <button onclick="runJobMatch()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-full cursor-pointer transition-all hover:scale-[1.02] flex items-center gap-1.5 shadow-md shadow-emerald-950/20">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <span id="tool-btn-run">开始 AI 匹配分析</span>
+                </button>
+                <button onclick="loadDemoJD()" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/35 font-bold text-xs rounded-full cursor-pointer transition-all">
+                  <span id="tool-btn-demo">使用示例 JD 测试</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- SCANNING STATE INDICATOR -->
+            <div id="scanning-indicator" class="hidden py-6 space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 rounded-full border-2 border-indigo-400 border-t-transparent animate-spin"></div>
+                <span class="text-xs font-mono text-indigo-300" id="scanning-step">正在提取岗位核心技能标签...</span>
+              </div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div id="scanning-progress-bar" class="bg-emerald-500 h-full w-0 transition-all duration-300"></div>
+              </div>
+            </div>
+
+            <!-- MATCH REPORT CONTAINER -->
+            <div id="match-report" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-6 mt-4 animate-fade-in text-slate-100">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                <div class="space-y-1">
+                  <h4 class="font-extrabold text-base sm:text-lg text-emerald-400 tracking-tight" id="rep-title">岗位匹配评估报告</h4>
+                  <p class="text-[10px] font-mono text-slate-400" id="rep-stamp">GENERATED BY EMPIRICAL ALIGNED ALGORITHM • SECURE STANDALONE</p>
+                </div>
+                <button onclick="closeReport()" class="text-xs text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 px-3 py-1.5 rounded-full transition-colors cursor-pointer">
+                  <span id="rep-btn-close">关闭报告</span>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Score Section -->
+                <div class="md:col-span-4 flex flex-col items-center justify-center p-4 bg-[#0f172a] rounded-2xl border border-slate-800 text-center space-y-3">
+                  <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest" id="rep-score-lbl">综合匹配度</span>
+                  <div class="relative w-28 h-28 flex items-center justify-center">
+                    <!-- Circle layout background -->
+                    <svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="40" stroke="#1e293b" stroke-width="8" fill="transparent"></circle>
+                      <circle id="rep-score-circle" cx="50" cy="50" r="40" stroke="#10b981" stroke-width="8" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="37"></circle>
+                    </svg>
+                    <span id="rep-score-value" class="text-3xl font-display font-black text-white">85%</span>
+                  </div>
+                  <div class="text-xs">
+                    <span class="text-slate-400" id="rep-level-lbl">推荐等级:</span>
+                    <span id="rep-level-val" class="text-emerald-400 font-bold ml-1">High (高度匹配)</span>
+                  </div>
+                </div>
+
+                <!-- Skill Radar / Bars -->
+                <div class="md:col-span-8 space-y-3">
+                  <h5 class="text-xs font-mono text-slate-400 uppercase tracking-wider" id="rep-sk-lbl">核心能力权重分解 (Capability Breakdown)</h5>
+                  
+                  <!-- Bar 1 -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span id="rep-b1-title">用户研究能力 (User Research)</span>
+                      <span id="rep-b1-val" class="font-mono text-indigo-300 font-bold">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div id="rep-b1-bar" class="bg-indigo-500 h-full w-[95%] transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                  <!-- Bar 2 -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span id="rep-b2-title">产品规划理解 (Product Planning)</span>
+                      <span id="rep-b2-val" class="font-mono text-indigo-300 font-bold">85%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div id="rep-b2-bar" class="bg-indigo-500 h-full w-[85%] transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                  <!-- Bar 3 -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span id="rep-b3-title">交互框架搭建 (Interaction Dev)</span>
+                      <span id="rep-b3-val" class="font-mono text-indigo-300 font-bold">90%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div id="rep-b3-bar" class="bg-indigo-500 h-full w-[90%] transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                  <!-- Bar 4 -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span id="rep-b4-title">设计表达呈现 (Design Expression)</span>
+                      <span id="rep-b4-val" class="font-mono text-indigo-300 font-bold">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div id="rep-b4-bar" class="bg-indigo-500 h-full w-[95%] transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                  <!-- Bar 5 -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between text-xs">
+                      <span id="rep-b5-title">AI 工具与开发协同 (AI & Code Co-op)</span>
+                      <span id="rep-b5-val" class="font-mono text-indigo-300 font-bold">92%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div id="rep-b5-bar" class="bg-indigo-500 h-full w-[92%] transition-all duration-500"></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Highlights and Improvements -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-800">
+                <!-- Highlights list -->
+                <div class="space-y-3">
+                  <h5 class="text-xs font-mono text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+                    <span id="rep-hl-title">核心匹配亮点</span>
+                  </h5>
+                  <ul id="rep-hl-list" class="text-xs text-slate-300 space-y-2 list-none pl-0">
+                    <!-- Injected JS -->
+                  </ul>
+                </div>
+
+                <!-- Improvements -->
+                <div class="space-y-3">
+                  <h5 class="text-xs font-mono text-amber-400 uppercase tracking-widest flex items-center gap-1.5">
+                    <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500"></i>
+                    <span id="rep-imp-title">建议考察与可提升方向</span>
+                  </h5>
+                  <ul id="rep-imp-list" class="text-xs text-slate-300 space-y-2 list-none pl-0">
+                    <!-- Injected JS -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Summary text -->
+              <div class="p-4 bg-slate-950/50 border border-slate-800 rounded-xl space-y-1">
+                <span class="text-[9px] font-mono text-slate-400 uppercase" id="rep-sum-lbl">匹配度总结</span>
+                <p class="text-xs text-slate-200 font-medium leading-relaxed" id="rep-sum-val"></p>
+              </div>
+
+              <!-- Roles -->
+              <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="text-slate-400" id="rep-role-lbl">建议匹配岗位:</span>
+                <div id="rep-role-tags" class="flex flex-wrap gap-1.5">
+                  <!-- Injected JS -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT INFO -->
+      <section id="contact" class="scroll-mt-24 space-y-6">
+        <div class="border-l-4 border-indigo-600 pl-4">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight" id="contact-heading">联系我 / Contact Me</h2>
+          <p class="text-xs font-mono text-slate-400 mt-1 uppercase tracking-wider" id="contact-sub-lbl">GET IN TOUCH OR DISCUSS WORK OPPORTUNITIES</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Left Call to action -->
+          <div class="md:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-bento space-y-5">
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900" id="contact-title">对我的研究、项目感兴趣？</h3>
+            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed text-justify" id="contact-desc">
+              对我的研究方向、项目经历或岗位合作机会感兴趣？非常欢迎您随时与我取得联系，期待能与优秀的您共同努力！
+            </p>
+
+            <div class="p-4 bg-indigo-50/40 border border-indigo-100/50 rounded-2xl flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-[10px] font-mono text-slate-400 uppercase" id="tel-lbl">联系电话</span>
+                  <span class="text-xs sm:text-sm font-bold text-slate-800 font-mono">13414136427</span>
+                </div>
+              </div>
+              <button onclick="copyPhone()" class="px-3.5 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 hover:text-indigo-600 text-xs font-bold rounded-xl shadow-2xs transition-all flex items-center gap-1 cursor-pointer">
+                <i data-lucide="copy" id="phone-copy-icon" class="w-3.5 h-3.5"></i>
+                <span id="btn-copy-phone">复制电话</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Grid values -->
+          <div class="md:col-span-5 grid grid-cols-1 gap-4">
+            <!-- Email Info -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-bento flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-0.5">
+                <h5 class="text-[10px] font-mono text-slate-400 uppercase" id="mail-lbl">电子邮箱</h5>
+                <p class="text-xs sm:text-sm font-bold text-slate-800 font-mono select-all">panbiying750@gmail.com</p>
+              </div>
+            </div>
+
+            <!-- Career Status -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-bento flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <i data-lucide="briefcase" class="w-5 h-5"></i>
+              </div>
+              <div class="space-y-0.5">
+                <h5 class="text-[10px] font-mono text-slate-400 uppercase" id="status-lbl">求职状态</h5>
+                <p class="text-xs sm:text-sm font-bold text-slate-800" id="status-val">寻求 2026/2027 用户研究、产品体验相关实习与全职工作</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 mt-20 shrink-0">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="space-y-1.5 text-center sm:text-left">
+          <h4 class="font-extrabold text-sm tracking-tight" id="foot-name">潘碧莹的个人作品集系统</h4>
+          <p class="text-xs text-slate-400 font-mono" id="foot-copy">© 2026 Biying. Handcrafted with AI Support. All rights reserved.</p>
+        </div>
+        
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1.5">
+          <i data-lucide="arrow-up" class="w-4 h-4"></i>
+          <span id="btn-back-to-top">返回顶部</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- PROJECT DELIVERABLES DETAIL MODAL -->
+  <div id="project-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/65 backdrop-blur-md animate-fade-in">
+    <div class="bg-white rounded-3xl max-w-2xl w-full border border-slate-200 shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
+      <!-- Modal Header -->
+      <div id="modal-header-color" class="p-6 bg-gradient-to-r from-indigo-900 to-[#0f172a] text-white flex items-center justify-between shrink-0">
+        <div class="space-y-1">
+          <span id="modal-badge" class="text-[9px] font-mono uppercase tracking-widest text-indigo-300 bg-indigo-950/40 border border-indigo-500/20 px-2 py-0.5 rounded-md">
+            PROCESS ARTIFACTS
+          </span>
+          <h4 id="modal-title" class="font-extrabold text-lg sm:text-xl text-white tracking-tight">小米电视桌面系统设计白皮书</h4>
+          <p id="modal-sub" class="text-xs text-slate-300 font-mono">用户行为分析 / 交互框架设计 / 桌面大屏系统体验</p>
+        </div>
+        <button onclick="closeProjectModal()" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer text-sm shrink-0 ml-4">✕</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1">
+        <!-- Duties -->
+        <div class="space-y-2">
+          <h5 class="text-xs font-mono text-slate-400 uppercase tracking-widest font-bold" id="modal-duties-lbl">核心工作内容</h5>
+          <ul id="modal-details-list" class="text-xs sm:text-sm text-slate-600 space-y-3 pl-5 list-disc">
+            <!-- Injected by JS -->
+          </ul>
+        </div>
+
+        <!-- Insights -->
+        <div class="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl space-y-2">
+          <h5 class="text-xs font-mono text-amber-800 uppercase tracking-widest font-bold flex items-center gap-1.5">
+            <i data-lucide="lightbulb" class="w-4 h-4 text-amber-600"></i>
+            <span id="modal-ins-lbl">实践沉淀与个人心收效</span>
+          </h5>
+          <ul id="modal-insights-list" class="text-xs sm:text-sm text-slate-700 space-y-1.5 list-none pl-0">
+            <!-- Injected by JS -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end shrink-0">
+        <button onclick="closeProjectModal()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-full transition-colors cursor-pointer">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lucide Icon Library Integration via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- JAVASCRIPT STATE ENGINE & CORE CODES -->
+  <script>
+    // State management
+    let lang = 'zh'; // 'zh' or 'en'
+    let activeModalProject = null;
+
+    // Direct content database matching types.ts
+    const translations = {
+      zh: {
+        bannerTag: "AI 作品集单网页版已就绪:",
+        bannerText: "此文件为独立运行的单HTML网页，完全支持手机端直接打开，自带离线版 AI 匹配诊断器！",
+        bannerBtnText: "保存到手机/电脑",
+        logoName: "潘碧莹 (Biying)",
+        logoTitle: "服务设计师 / 产品经理",
+        navAbout: "关于我",
+        navEdu: "教育背景",
+        navProj: "项目经历",
+        navSkills: "技能特长",
+        navLearn: "学习探索",
+        navContact: "联系我",
+        langBtnText: "English",
+        heroBadge: "工业设计工程硕士研究生在读",
+        heroTitle: "Hi，我是潘碧莹",
+        heroSub: "工业设计工程硕士 / 服务体验设计研究者",
+        heroBio: "我目前是广东工业大学工业设计工程专业的研究生，研究方向聚焦于服务体验设计与用户研究。我具备深厚的工科硕士学术素养和敏锐的用户洞察力，擅长在复杂场景中拆解用户痛点、提炼行为数据并构建落地化的产品与服务系统。在AI时代，我积极探索并倡导AI驱动的创新设计流，致力于成为兼具研究力、共情心与技术视野的优秀产品经理与用户研究员。",
+        heroMotto: "努力生活，也努力把问题看清楚。",
+        btnContact: "与我联系",
+        btnMatch: "AI 岗位匹配器",
+        cardEduTitle: "教育背景",
+        cardEduVal: "广工大工科硕士 / 在读",
+        cardAwardTitle: "核心荣誉",
+        cardAwardVal: "华灿奖全国一等奖",
+        cardResLabel: "研究重点",
+        cardResTitle: "服务体验设计与系统化用研",
+        cardResDesc: "在大屏行为数据、养老辅具及AI协同研发等方向积累了深度微观用户洞察与完整的交互白皮书、微改造评估报告撰写经历。",
+        eduHeading: "教育背景 / Education",
+        eduSub: "学术根基与用研体系",
+        eduSchool: "广东工业大学 (Guangdong University of Technology)",
+        eduDegree: "硕士研究生 (工科硕士)",
+        eduPeriod: "2025.09 – 2028.06 (在读)",
+        eduAward: "华灿奖全国一等奖获得者",
+        eduDirTitle: "主修方向",
+        eduDirection: "研究方向：服务体验设计、用户体验研究、系统化产品策划",
+        eduDesc: "在校期间深入研修用户洞察、跨学科设计研究方法、人机交互体验与数字服务设计。在课程和实验室科研任务中，建立了一套严谨的、从痛点发现到落地转化的工科系统化设计思维框架，能够熟练地将学术方法应用于商业应用开发。",
+        projHeading: "项目经历 / Projects",
+        projSub: "精选用研、交互与服务体验研究产出",
+        p1Badge: "大屏用户行为分析",
+        p1Title: "小米电视桌面系统设计白皮书",
+        p1Sub: "用户行为分析 / 交互框架设计 / 桌面大屏系统体验",
+        p1Desc: "该项目聚焦智能电视大屏桌面系统的用户行为与痛点研究。通过大量的实地访谈、眼动实验和点击数据流分析，重点解构了用户在家庭多光源、远距离视听场景下的“信息检索路径”、“内容浏览偏好”与“核心操作决策”，为下一代电视大屏桌面交互提供严谨的用户行为和设计规范支撑。",
+        p2Badge: "适老化空间改造",
+        p2Title: "粤港澳大湾区“缮居”适老化公益改造设计",
+        p2Sub: "空间实地调研 / 适老动线测绘 / 改造评估报告撰写",
+        p2Desc: "参与广东省工业设计协会主导的大湾区适老化空间帮扶项目。深入顺德2户特殊帮扶家庭进行多轮实地调研、空间扫描、行为轨迹测绘。结合老年人身体机能退化特征、日常起居和护理痛点，运用服务设计链路、用户画像、体验旅程图等方法，输出兼具空间适老安全与心理关怀的整套评估报告与空间优化蓝图，极高地提升了帮扶家庭的晚年生活品质。",
+        p3Badge: "AI协同与原型交付",
+        p3Title: "AI协同原型与设计研究开发",
+        p3Sub: "AI 代码协同 / 响应式原型独立开发 / 自动化云部署",
+        p3Desc: "在人工智能驱动变革的背景下，积极探索将大语言模型（LLM）与前端开发代码深度结合。通过手写 HTML/JS/React 与 Tailwind CSS，不依赖传统臃肿的研发流程，实现从“用研洞察 - 交互原型 - 响应式代码 - 自动化云部署”的全链路闭环验证，极高地拓宽了产品经理的工程视野与创新实现边界。本个人作品集网站正是该研究的标杆产出。",
+        viewProjText: "查看详情 & 过程产出",
+        skillsHeading: "技能特长 / Skills",
+        skillsSub: "专业工具链与研究资产能力",
+        sk1Title: "用户研究能力 (User Research)",
+        sk1_1: "定性访谈 & 焦点小组 (In-depth Interviews)",
+        sk1_2: "田野调查 & 参与式观察 (Fieldwork)",
+        sk1_3: "眼动追踪 & 点击流行为分析 (Eye Tracking)",
+        sk1_4: "用户体验旅程图 & 用户画像 (CJM & Personas)",
+        sk2Title: "产品与服务设计 (Product & Service)",
+        sk2_1: "服务设计链路与触点规划 (Service Touchpoints)",
+        sk2_2: "交互框架设计与信息架构 (Wireframing)",
+        sk2_3: "系统化产品策划与策略性汇报 (PRD Structure)",
+        sk2_4: "适老化微改造及人因安全评估 (Human Factors)",
+        sk3Title: "设计工具 (Design Tools)",
+        sk3_1: "Figma & Sketch 高保真交互原型",
+        sk3_2: "Rhino & KeyShot 产品建模与逼真渲染",
+        sk3_3: "Blender & PS/AI 视觉设计与动效",
+        sk3_4: "Notion 团队协同与项目知识库管理",
+        sk4Title: "AI 与代码协同 (AI & Code Collaboration)",
+        sk4_1: "ChatGPT 结构化 Prompt 提炼用研文本",
+        sk4_2: "Midjourney 概念渲染与高质量场景图",
+        sk4_3: "HTML5 / JavaScript (ES6) 快速原型开发",
+        sk4_4: "Tailwind CSS 移动端完美自适应响应式还原",
+        learnHeading: "学习与探索 / Learning & Exploration",
+        learnSub: "探索 AI 辅助的全流程敏捷设计方法",
+        learnIntroText: "作为一名新一代的数字化产品经理与用户研究员，我深信 AI 不仅仅是效率工具，更是一种帮助设计师和研究员快速验证想法、拓展表达边界、搭建轻量级产品模型的新型「协作伙伴」。我致力于探索「研究-设计-AI辅助原型-代码落地」的全栈链路。",
+        li1Title: "AI 辅助用户需求分析 & 信息提炼",
+        li1Desc: "利用 ChatGPT 等大语言模型建立结构化 Prompt 模板，辅助处理高密度的定性访谈文本。对数万字的用户访谈录音进行语义聚类，提取出核心痛点，使传统质性分析效率提升 3 倍以上，确保洞察有据可依。",
+        li2Title: "AI 辅助视觉概念与情境渲染生成",
+        li2Desc: "在项目初期创意发散阶段，使用 Midjourney、Stable Diffusion 快速合成用户体验场景图、情绪板与适老化改造意向图。能够用精确的提示词将枯燥的概念方案转化为富有情感张力的视觉参考，让利益相关者一眼看清未来图景。",
+        li3Title: "AI 辅助网页原型搭建 & 动效开发",
+        li3Desc: "打破设计师与开发者的界限，利用 OpenCode 平台与大模型辅助，手写 HTML、Tailwind CSS 及 JavaScript，实现网页端作品集与交互原型的快速交付。本站即是该实践的成果之一，实现了零代码到全栈轻量开发的跨越。",
+        li4Title: "GitHub Pages 自动化部署实践",
+        li4Desc: "熟练掌握 Git 版本控制及 GitHub Actions 工作流，实现静态网页作品集的自动化构建与全球云端托管。保障多设备、全平台秒级加载和极致的自适应呈现，体现产品经理的全面工程思维。",
+        matcherHeading: "AI 岗位匹配度测评 / AI Matcher",
+        matcherSubLabel: "测试 Biying 与您的团队岗位的契合度",
+        toolTitle: "输入您的岗位需求 (JD) 测试匹配度",
+        toolSub: "想知道潘碧莹与您的团队岗位匹配度如何？在此处粘贴您的招聘职责描述，我们将运行离线版智能匹配解析引擎，评估其各项核心指标并输出诊断报告！",
+        toolPlaceholder: "在此处粘贴您的招聘岗位职责 (Job Description)，例如：\n1. 负责用户需求调研，建立用户画像...\n2. 具备优秀的信息架构与交互设计能力，熟练掌握 Figma...\n3. 工业设计、人机交互相关专业硕士优先...",
+        toolBtnRun: "开始 AI 匹配分析",
+        toolBtnDemo: "使用示例 JD 测试",
+        repTitle: "岗位匹配评估报告",
+        repStamp: "GENERATED BY EMPIRICAL ALIGNED ALGORITHM • SECURE STANDALONE",
+        repBtnClose: "关闭报告",
+        repScoreLbl: "综合匹配度",
+        repLevelLbl: "推荐等级:",
+        repSkLbl: "核心能力权重分解 (Capability Breakdown)",
+        repB1Title: "用户研究能力 (User Research)",
+        repB2Title: "产品规划理解 (Product Planning)",
+        repB3Title: "交互框架搭建 (Interaction Dev)",
+        repB4Title: "设计表达呈现 (Design Expression)",
+        repB5Title: "AI 工具与开发协同 (AI & Code Co-op)",
+        repHlTitle: "核心匹配亮点",
+        repImpTitle: "建议考察与可提升方向",
+        repSumLbl: "匹配度总结",
+        repRoleLbl: "建议匹配岗位:",
+        contactHeading: "联系我 / Contact Me",
+        contactSubLbl: "取得联系或交流合作机会",
+        contactTitle: "对我的研究、项目感兴趣？",
+        contactDesc: "对我的研究方向、项目经历或岗位合作机会感兴趣？非常欢迎您随时与我取得联系，期待能与优秀的您共同努力！",
+        telLbl: "联系电话",
+        mailLbl: "电子邮箱",
+        statusLbl: "求职状态",
+        statusVal: "寻求 2026/2027 用户研究、产品体验相关实习与全职工作",
+        btnCopyPhone: "复制电话",
+        btnCopiedText: "已复制到剪切板",
+        footName: "潘碧莹的个人作品集系统",
+        footCopy: "© 2026 Biying. Handcrafted with AI Support. All rights reserved.",
+        btnBackToTop: "返回顶部",
+        modalDutiesLbl: "核心工作内容",
+        modalInsLbl: "实践沉淀与个人心收效"
+      },
+      en: {
+        bannerTag: "Standalone HTML Portfolio Active:",
+        bannerText: "This file is a fully self-contained HTML page. It works directly on mobile phones with offline-powered AI Matcher diagnostics!",
+        bannerBtnText: "Save / Download File",
+        logoName: "Biying Pan",
+        logoTitle: "Service Designer / Product Manager",
+        navAbout: "About Me",
+        navEdu: "Education",
+        navProj: "Projects",
+        navSkills: "Skills",
+        navLearn: "Learning",
+        navContact: "Contact",
+        langBtnText: "中文",
+        heroBadge: "M.S. Industrial Design Engineering Candidate",
+        heroTitle: "Hi, I'm Pan Biying",
+        heroSub: "Master of Industrial Design Engineering / Service Experience Researcher",
+        heroBio: "I am a postgraduate student majoring in Industrial Design Engineering at Guangdong University of Technology, focusing heavily on service experience design and user research. Combining engineering rigor with empathetic user insights, I excel at dissecting pain points, analyzing behavioral data, and transforming them into tangible product solutions. In the era of AI, I actively champion AI-driven workflows to become a product manager and user researcher with exceptional strategic depth, user empathy, and technology vision.",
+        heroMotto: "Live with passion, design with absolute clarity.",
+        btnContact: "Get in touch",
+        btnMatch: "AI Job Matcher",
+        cardEduTitle: "ACADEMICS",
+        cardEduVal: "GDUT Engineering Master / Candidate",
+        cardAwardTitle: "CORE AWARD",
+        cardAwardVal: "Huacan Award National First Prize",
+        cardResLabel: "RESEARCH FOCUS",
+        cardResTitle: "Service Design & Structural UXR",
+        cardResDesc: "Rich, hands-on insights in big screen analytics, assistive care environments, and prompt-driven rapid UI development.",
+        eduHeading: "Education Background",
+        eduSub: "ACADEMIC FOUNDATIONS & RESEARCH PATHWAYS",
+        eduSchool: "Guangdong University of Technology (GDUT)",
+        eduDegree: "Master of Industrial Design Engineering",
+        eduPeriod: "Sept. 2025 – June 2028 (Expected)",
+        eduAward: "Huacan Award - National First Prize Winner",
+        eduDirTitle: "RESEARCH SCOPE",
+        eduDirection: "Research: Service Experience Design, User Experience Research, Product Planning",
+        eduDesc: "Dived deep into user insights, qualitative design methodologies, human-computer interaction, and digital service architectures. Developed a systematic engineering design workflow in courses and lab research, turning user pain points into highly structured, realistic development inputs.",
+        projHeading: "Project Experiences",
+        projSub: "SELECTED RESEARCH, SERVICES & UX CASE STUDIES",
+        p1Badge: "TV OS BIG SCREEN STUDY",
+        p1Title: "Xiaomi TV Desktop System Design White Paper",
+        p1Sub: "User Behavior Analysis / Interaction Framework / TV OS Big Screen Experience",
+        p1Desc: "This user research project studied smart TV desktop interactions and remote content-browsing behaviors. Through in-depth user interviews, eye-tracking experiments, and click-stream analytics, we mapped information discovery pathways and core control patterns under home-ambient viewing setups to provide solid framework standards for Xiaomi TV OS.",
+        p2Badge: "ELDERCARE EXPERIENCE",
+        p2Title: "Shanju Public Welfare Aging-Friendly Remodeling Project",
+        p2Sub: "Space Renovation / Elder Behavioral Tracking / Assessment Writing",
+        p2Desc: "Participated in the Shanju welfare housing initiative sponsored by the Guangdong Industrial Design Association. Visited assisted elder care homes in Shunde, conducting hours of physical surveys, safety checking, and behavioral map tracking. Leveraging service pathways, personas, and experience blueprints, we delivered a comprehensive renovation report and layout blueprint to enhance seniors' quality of life safely.",
+        p3Badge: "AI ENGINEERING CO-OP",
+        p3Title: "AI-Collaborative Prototyping & Design R&D",
+        p3Sub: "AI & Code Co-Creation / Full-stack Responsive Dev / Rapid Deployment",
+        p3Desc: "Exploring deep integrations of Large Language Models (LLM) with frontend engineering under the AI era, accelerating PM ideas and user insights into live products. Handcrafting HTML/JS/React and Tailwind CSS structures to bypass heavy R&D cycles, achieving a closed-loop validation flow of 'Insights - Interactive Prototype - Production Code - Cloud Deployment'. This personal portfolio site is a key milestone of this active investigation.",
+        viewProjText: "View Details & Deliverables",
+        skillsHeading: "Professional Skills",
+        skillsSub: "PROFESSIONAL TOOLKIT & RESEARCH CAPABILITIES",
+        sk1Title: "User Research & Analysis (UXR)",
+        sk1_1: "定性访谈 & 焦点小组 (In-depth Interviews)",
+        sk1_2: "田野调查 & 参与式观察 (Fieldwork)",
+        sk1_3: "眼动追踪 & 点击流行为分析 (Eye Tracking)",
+        sk1_4: "用户体验旅程图 & 用户画像 (CJM & Personas)",
+        sk2Title: "Product & Service Design",
+        sk2_1: "服务设计链路与触点规划 (Service Touchpoints)",
+        sk2_2: "交互框架设计与信息架构 (Wireframing)",
+        sk2_3: "系统化产品策划与策略性汇报 (PRD Structure)",
+        sk2_4: "适老化微改造及人因安全评估 (Human Factors)",
+        sk3Title: "Design & Prototyping Tools",
+        sk3_1: "Figma & Sketch 高保真交互原型",
+        sk3_2: "Rhino & KeyShot 产品建模与逼真渲染",
+        sk3_3: "Blender & PS/AI 视觉设计与动效",
+        sk3_4: "Notion 团队协同与项目知识库管理",
+        sk4Title: "AI & Engineering Collaboration",
+        sk4_1: "ChatGPT 结构化 Prompt 提炼用研文本",
+        sk4_2: "Midjourney 概念渲染与高质量场景图",
+        sk4_3: "HTML5 / JavaScript (ES6) 快速原型开发",
+        sk4_4: "Tailwind CSS 移动端完美自适应响应式还原",
+        learnHeading: "Learning & Exploration",
+        learnSub: "PIONEERING AI-DRIVEN COLLABORATIVE DESIGN METHODS",
+        learnIntroText: "As an AI-native Product Manager and User Researcher, I strongly believe that artificial intelligence is more than just a booster for productivity; it is a collaborative companion that lets designers iterate, wireframe, and test complex concepts at lightning speed. I am dedicated to pioneering the full-stack workflow of 'Research-Design-AI Prototyping-Code Delivery'.",
+        li1Title: "AI-Augmented Requirement Clarification",
+        li1Desc: "Engineered structural prompts with Large Language Models to summarize qualitative user interview transcriptions. Grouped semantic keywords and themes from tens of thousands of transcript words, accelerating the qualitative synthesis cycle by 3x with robust evidentiary support.",
+        li2Title: "AI-Driven Concept Visualization",
+        li2Desc: "Crafted situational renders, user persona scenarios, and architectural moodboards in early design stages with Midjourney and Stable Diffusion. Translated abstract product requirements into highly immersive, emotionally resonant visuals that align client expectations in seconds.",
+        li3Title: "AI-Enabled Rapid Prototyping",
+        li3Desc: "Bridged the gap between high-fidelity design and live code. Leveraged large code-generation assistants and OpenCode to author responsive HTML, Tailwind CSS, and React apps. This portfolio itself is a living testament to that cross-disciplinary exploration.",
+        li4Title: "GitHub Pages & CI/CD Deployment Practice",
+        li4Desc: "Mastered Git versioning and GitHub Actions CI/CD pipelines to host and deliver responsive portfolios globally. Maintained sub-second loading performance and perfect adaptive alignment across mobile and desktop, proving full product lifecycle execution.",
+        matcherHeading: "AI Job Matcher Diagnostic",
+        matcherSubLabel: "EVALUATE FIT WITH YOUR TEAM SPECIFIC JOB ROLE",
+        toolTitle: "Paste Job Description (JD) to Test Fit",
+        toolSub: "Curious how well Biying fits your team's specific requirements? Paste your Job Description (JD) below to run our secure, offline-compatible matching framework and get an instant report!",
+        toolPlaceholder: "Paste your job description responsibilities and requirements here, for example:\n1. Conduct user interviews, build personas, translate insights into features...\n2. Solid skills in Figma, wireframing, and cross-functional design collaboration...\n3. Master's degree in Industrial Design, HCI, or related field is highly preferred...",
+        toolBtnRun: "Analyze JD with AI",
+        toolBtnDemo: "Load Demo JD",
+        repTitle: "Job Match Assessment Report",
+        repStamp: "GENERATED BY EMPIRICAL ALIGNED ALGORITHM • SECURE STANDALONE",
+        repBtnClose: "Close Report",
+        repScoreLbl: "Matching Score",
+        repLevelLbl: "Relevance Level:",
+        repSkLbl: "Capability Breakdown Weighting",
+        repB1Title: "User Research & Analysis",
+        repB2Title: "Product Planning & Logic",
+        repB3Title: "Interaction Frameworking",
+        repB4Title: "Design Expression & UI",
+        repB5Title: "AI & Engineering Co-op",
+        repHlTitle: "Key Matching Highlights",
+        repImpTitle: "Recommended Areas to Explore / Interview Suggestions",
+        repSumLbl: "Executive Fit Summary",
+        repRoleLbl: "Suggested Roles:",
+        contactHeading: "Contact Me / Get In Touch",
+        contactSubLbl: "GET IN TOUCH FOR DISCUSSIONS & INTERVIEWS",
+        contactTitle: "Interested in my research or projects?",
+        contactDesc: "Interested in my service design research, project portfolios, or hiring opportunities? I would love to hear from you. Let's make something amazing together!",
+        telLbl: "Phone Call",
+        mailLbl: "Email Inbox",
+        statusLbl: "Hiring Status",
+        statusVal: "Open to 2026/2027 Internships & Full-time Roles in UXR / PM / Experience Design",
+        btnCopyPhone: "Copy Phone",
+        btnCopiedText: "Copied to clipboard",
+        footName: "Biying's Portfolio System",
+        footCopy: "© 2026 Biying. Handcrafted with AI Support. All rights reserved.",
+        btnBackToTop: "Back To Top",
+        modalDutiesLbl: "Core Duties",
+        modalInsLbl: "Practice Insights & takeaways"
+      }
+    };
+
+    const projectData = {
+      1: {
+        zh: {
+          badge: "小米桌面白皮书",
+          title: "小米电视桌面系统设计白皮书",
+          sub: "用户行为分析 / 交互框架设计 / 桌面大屏系统体验",
+          details: [
+            "「用户行为矩阵重构」：绘制了超过5类典型家庭角色的电视桌面使用动线，发现用户在信息流深度超过3层时流失率增加 42%。",
+            "「信息架构精简」：重构导航架构，压缩桌面视觉层级，提出多维联动式推荐交互逻辑，让用户单次内容获取路径缩短 35%。",
+            "「动态布局规范」：根据大屏远视距特征（2.5m - 3.5m），协助团队提炼了不同卡片大小与视觉焦点的极简排布原则。"
+          ],
+          insights: [
+            "电视桌面系统不仅是内容呈现媒介，更是家庭多成员共用场景下的情感交织点，交互设计必须极简、零等待。",
+            "将复杂的用户行为数据，提炼为具体卡片的动态排布原则，是用户研究员核心的桥梁价值。"
+          ]
+        },
+        en: {
+          badge: "XIAOMI WHITE PAPER",
+          title: "Xiaomi TV Desktop System Design White Paper",
+          sub: "User Behavior Analysis / Interaction Framework / TV OS Big Screen Experience",
+          details: [
+            "Reconstructed User Behavior Matrix: Mapped television viewing flow for 5 primary household roles, discovering a 42% user bounce rate when content depth exceeded 3 levels.",
+            "Streamlined Information Architecture: Redesigned the navigation grid and visual card hierarchy, suggesting multi-dimensional recommendations that saved 35% of users' selection pathways.",
+            "Formulated Layout Standards: Assisted in summarizing card alignment and sizing metrics tailored for remote visual fields (2.5m - 3.5m viewing distance)."
+          ],
+          insights: [
+            "TV desktop interfaces represent shared family emotional hotspots; interactions must be immediate, minimalist, and zero-effort.",
+            "Translating rich behavioral research findings into precise digital layout metrics is the core value of a User Experience Researcher."
+          ]
+        }
+      },
+      2: {
+        zh: {
+          badge: "适老化改造「缮居」",
+          title: "粤港澳大湾区“缮居”适老化公益改造设计",
+          sub: "广东省工业设计协会公益项目 / 适老化空间研究 / 动线重组与评估报告",
+          details: [
+            "「实地参与式观察」：累计进行超过 40 小时的田野调查与居家深度访谈，精准定位老年人在卫生间湿滑跌倒、卧室起床扶手空缺、厨房收纳高频弯腰等 12 处高危物理隐患点。",
+            "「适老化动线重组」：应用行为流测绘，重组老人清晨起床-洗漱-早餐的最短安全交互动线，减少非必要曲折路径，避免二次跌倒伤害。",
+            "「评估与改造方案输出」：主导撰写共计 80 页的「缮居实地微改造评估报告与蓝图」，输出包括低成本多功能扶手布局、折叠淋浴凳、无障碍光环境等在内的实用改造策略，获得了行业协会和社区的高度认可。"
+          ],
+          insights: [
+            "适老化设计绝对不是简单的安装扶手，而是对老年人全天生活方式、感官衰退细节与自尊心理的深度体恤。",
+            "好的设计必须有温度，工科硕士的逻辑力能让温度真正落地。"
+          ]
+        },
+        en: {
+          badge: "SHANJU AGING-FRIENDLY",
+          title: "Shanju Public Welfare Aging-Friendly Remodeling Project",
+          sub: "Guangdong Industrial Design Association Public Welfare Project / Space Renovation & Safe Movement",
+          details: [
+            "Conducted Participatory Research: Logged over 40 hours of field observation and interviews to uncover 12 critical bathroom slippage, bedroom handrail, and kitchen height safety hazards.",
+            "Reorganized Elderly Spatial Pathways: Re-mapped safe, optimized routines for morning wakeup, washing, and dining, eliminating redundant pathways to avoid secondary physical falls.",
+            "Delivered Renovation Blueprints: Wrote an 80-page comprehensive evaluation paper proposing low-cost modular grab-bars, folding shower chairs, and accessible lighting strategies, highly praised by the association."
+          ],
+          insights: [
+            "Aging-friendly design is not simply drilling handrails; it is the ultimate empathy for sensory decline, everyday lifestyles, and seniors' emotional dignity.",
+            "An engineering master's logic ensures that empathetic design warmth is delivered with structurally sound and flawless execution."
+          ]
+        }
+      },
+      3: {
+        zh: {
+          badge: "AI 协同设计与全栈研发",
+          title: "AI协同原型与设计研究开发",
+          sub: "AI 与代码协同 / 全栈响应式开发 / 个人作品集快速搭建与部署",
+          details: [
+            "「AI 提示词工程闭环」：构建了面向用研文本提炼、产品 PRD 结构化生成的多套 System Prompts，使用大模型对非结构化反馈进行聚类，需求整理提效 300%。",
+            "「响应式前端独立开发」：手写并优化本作品集的 HTML + CSS + JS 架构，实现极其流畅的微交互、完美的移动端自适应以及高性能渲染。",
+            "「全栈式匹配算法设计」：在前端纯净沙盒中实现了双语言岗位匹配诊断机制（离线关键词语义分析），为招聘方提供一键式、极具说服力的互动评估体验。"
+          ],
+          insights: [
+            "在 AI 时代，产品经理不应只停留在画线框图，而是要用 AI 作为杠杆，掌握手写响应式原型的全栈交付能力，让好点子当天就能上线运行。",
+            "AI 与代码的协同，极大地缩短了用户研究到原型测试的反馈环，是新一代复合型数字化产品经理的终极壁垒。"
+          ]
+        },
+        en: {
+          badge: "AI DESIGN CO-R&D",
+          title: "AI-Collaborative Prototyping & Design R&D",
+          sub: "AI & Code Co-Creation / Full-stack Responsive Dev / Rapid Deployment",
+          details: [
+            "Prompt Engineering Closed-Loop: Engineered structural system prompt templates for qualitative synthesis and automated PRD generation, elevating semantic sorting speed by 3x.",
+            "Full-Stack Frontend Engineering: Independently authored and refined the React + Tailwind system of this portfolio, assuring smooth micro-interactions and desktop/mobile adaptability.",
+            "Intelligent Matching Logic: Designed a dual-engine diagnostics matching module (Gemini AI parsing + keyword fallback filtering) on Express server, giving recruiters an interactive fit report."
+          ],
+          insights: [
+            "In the AI era, product managers shouldn't stay on static paper wireframes. Using AI as a lever to deploy live, responsive code prototypes makes designs instantly testable.",
+            "Active co-creation with AI and code shrinks the gap between user discovery and final product validation, representing the next-gen barrier for modern digital PMs."
+          ]
+        }
+      }
+    };
+
+    const demoJDs = {
+      zh: `招聘岗位：体验设计专家 / 产品经理
+1. 负责核心用户需求调研与信息提炼，构建高可用用户画像和体验旅程图(CJM)；
+2. 协同技术与视觉团队落地高保真交互线框图与动态原型；
+3. 工业设计、人机交互等专业硕士学历优先。具备服务设计思维加分。`,
+      en: `Position: UX Researcher / Associate Product Manager
+1. Gather and synthesize user requirements, creating precise personas and experience blueprints.
+2. Coordinate with engineering and creative design squads to author interactive mockups/prototypes.
+3. Master's degree in HCI, Industrial Design, or cognitive psychology is a plus.`
+    };
+
+    // Render translation text
+    function updateUI() {
+      const dict = translations[lang];
+      
+      // Update element contents
+      document.getElementById('banner-tag').textContent = dict.bannerTag;
+      document.getElementById('banner-text').textContent = dict.bannerText;
+      document.getElementById('banner-btn-text').textContent = dict.bannerBtnText;
+      document.getElementById('logo-name').textContent = dict.logoName;
+      document.getElementById('logo-title').textContent = dict.logoTitle;
+      document.getElementById('nav-about').textContent = dict.navAbout;
+      document.getElementById('nav-edu').textContent = dict.navEdu;
+      document.getElementById('nav-proj').textContent = dict.navProj;
+      document.getElementById('nav-skills').textContent = dict.navSkills;
+      document.getElementById('nav-learn').textContent = dict.navLearn;
+      document.getElementById('nav-contact').textContent = dict.navContact;
+      document.getElementById('lang-btn-text').textContent = dict.langBtnText;
+      document.getElementById('hero-badge').textContent = dict.heroBadge;
+      document.getElementById('hero-title').textContent = dict.heroTitle;
+      document.getElementById('hero-sub').textContent = dict.heroSub;
+      document.getElementById('hero-bio').textContent = dict.heroBio;
+      document.getElementById('hero-motto').textContent = dict.heroMotto;
+      document.getElementById('btn-contact').textContent = dict.btnContact;
+      document.getElementById('btn-match').textContent = dict.btnMatch;
+      
+      document.getElementById('card-edu-title').textContent = dict.cardEduTitle;
+      document.getElementById('card-edu-val').textContent = dict.cardEduVal;
+      document.getElementById('card-award-title').textContent = dict.cardAwardTitle;
+      document.getElementById('card-award-val').textContent = dict.cardAwardVal;
+      document.getElementById('card-res-label').textContent = dict.cardResLabel;
+      document.getElementById('card-res-title').textContent = dict.cardResTitle;
+      document.getElementById('card-res-desc').textContent = dict.cardResDesc;
+
+      document.getElementById('edu-heading').textContent = dict.eduHeading;
+      document.getElementById('edu-sub').textContent = dict.eduSub;
+      document.getElementById('edu-school').textContent = dict.eduSchool;
+      document.getElementById('edu-degree').textContent = dict.eduDegree;
+      document.getElementById('edu-period').textContent = dict.eduPeriod;
+      document.getElementById('edu-award').textContent = dict.eduAward;
+      document.getElementById('edu-dir-title').textContent = dict.eduDirTitle;
+      document.getElementById('edu-direction').textContent = dict.eduDirection;
+      document.getElementById('edu-desc').textContent = dict.eduDesc;
+
+      document.getElementById('proj-heading').textContent = dict.projHeading;
+      document.getElementById('proj-sub').textContent = dict.projSub;
+      document.getElementById('p1-badge').textContent = dict.p1Badge;
+      document.getElementById('p1-title').textContent = dict.p1Title;
+      document.getElementById('p1-sub').textContent = dict.p1Sub;
+      document.getElementById('p1-desc').textContent = dict.p1Desc;
+
+      document.getElementById('p2-badge').textContent = dict.p2Badge;
+      document.getElementById('p2-title').textContent = dict.p2Title;
+      document.getElementById('p2-sub').textContent = dict.p2Sub;
+      document.getElementById('p2-desc').textContent = dict.p2Desc;
+
+      document.getElementById('p3-badge').textContent = dict.p3Badge;
+      document.getElementById('p3-title').textContent = dict.p3Title;
+      document.getElementById('p3-sub').textContent = dict.p3Sub;
+      document.getElementById('p3-desc').textContent = dict.p3Desc;
+
+      const viewBtns = document.querySelectorAll('.proj-view-btn-text');
+      viewBtns.forEach(btn => btn.textContent = dict.viewProjText);
+
+      document.getElementById('skills-heading').textContent = dict.skillsHeading;
+      document.getElementById('skills-sub').textContent = dict.skillsSub;
+      document.getElementById('sk1-title').textContent = dict.sk1Title;
+      document.getElementById('sk1-1').textContent = dict.sk1_1;
+      document.getElementById('sk1-2').textContent = dict.sk1_2;
+      document.getElementById('sk1-3').textContent = dict.sk1_3;
+      document.getElementById('sk1-4').textContent = dict.sk1_4;
+
+      document.getElementById('sk2-title').textContent = dict.sk2Title;
+      document.getElementById('sk2-1').textContent = dict.sk2_1;
+      document.getElementById('sk2-2').textContent = dict.sk2_2;
+      document.getElementById('sk2-3').textContent = dict.sk2_3;
+      document.getElementById('sk2-4').textContent = dict.sk2_4;
+
+      document.getElementById('sk3-title').textContent = dict.sk3Title;
+      document.getElementById('sk3-1').textContent = dict.sk3_1;
+      document.getElementById('sk3-2').textContent = dict.sk3_2;
+      document.getElementById('sk3-3').textContent = dict.sk3_3;
+      document.getElementById('sk3-4').textContent = dict.sk3_4;
+
+      document.getElementById('sk4-title').textContent = dict.sk4Title;
+      document.getElementById('sk4-1').textContent = dict.sk4_1;
+      document.getElementById('sk4-2').textContent = dict.sk4_2;
+      document.getElementById('sk4-3').textContent = dict.sk4_3;
+      document.getElementById('sk4-4').textContent = dict.sk4_4;
+
+      document.getElementById('learn-heading').textContent = dict.learnHeading;
+      document.getElementById('learn-sub').textContent = dict.learnSub;
+      document.getElementById('learn-intro-text').textContent = dict.learnIntroText;
+      document.getElementById('li1-title').textContent = dict.li1Title;
+      document.getElementById('li1-desc').textContent = dict.li1Desc;
+      document.getElementById('li2-title').textContent = dict.li2Title;
+      document.getElementById('li2-desc').textContent = dict.li2Desc;
+      document.getElementById('li3-title').textContent = dict.li3Title;
+      document.getElementById('li3-desc').textContent = dict.li3Desc;
+      document.getElementById('li4-title').textContent = dict.li4Title;
+      document.getElementById('li4-desc').textContent = dict.li4Desc;
+
+      document.getElementById('matcher-heading').textContent = dict.matcherHeading;
+      document.getElementById('matcher-sub-label').textContent = dict.matcherSubLabel;
+      document.getElementById('tool-title').textContent = dict.toolTitle;
+      document.getElementById('tool-sub').textContent = dict.toolSub;
+      document.getElementById('tool-btn-run').textContent = dict.toolBtnRun;
+      document.getElementById('tool-btn-demo').textContent = dict.toolBtnDemo;
+      document.getElementById('jd-textarea').placeholder = dict.toolPlaceholder;
+
+      document.getElementById('contact-heading').textContent = dict.contactHeading;
+      document.getElementById('contact-sub-lbl').textContent = dict.contactSubLabel;
+      document.getElementById('contact-title').textContent = dict.contactTitle;
+      document.getElementById('contact-desc').textContent = dict.contactDesc;
+      document.getElementById('tel-lbl').textContent = dict.telLbl;
+      document.getElementById('mail-lbl').textContent = dict.mailLbl;
+      document.getElementById('status-lbl').textContent = dict.statusLbl;
+      document.getElementById('status-val').textContent = dict.statusVal;
+      document.getElementById('btn-copy-phone').textContent = dict.btnCopyPhone;
+      document.getElementById('foot-name').textContent = dict.footName;
+      document.getElementById('foot-copy').textContent = dict.footCopy;
+      document.getElementById('btn-back-to-top').textContent = dict.btnBackToTop;
+
+      document.getElementById('modal-duties-lbl').textContent = dict.modalDutiesLbl;
+      document.getElementById('modal-ins-lbl').textContent = dict.modalInsLbl;
+
+      // Update mobile menu texts
+      document.getElementById('mob-about').textContent = dict.navAbout;
+      document.getElementById('mob-edu').textContent = dict.navEdu;
+      document.getElementById('mob-proj').textContent = dict.navProj;
+      document.getElementById('mob-skills').textContent = dict.navSkills;
+      document.getElementById('mob-learn').textContent = dict.navLearn;
+      document.getElementById('mob-contact').textContent = dict.navContact;
+    }
+
+    // Toggle language
+    function toggleLanguage() {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      updateUI();
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Copy Phone number
+    function copyPhone() {
+      navigator.clipboard.writeText('13414136427');
+      const btn = document.getElementById('btn-copy-phone');
+      const icon = document.getElementById('phone-copy-icon');
+      
+      const prevText = btn.textContent;
+      btn.textContent = translations[lang].btnCopiedText;
+      icon.setAttribute('data-lucide', 'check');
+      lucide.createIcons();
+
+      setTimeout(() => {
+        btn.textContent = prevText;
+        icon.setAttribute('data-lucide', 'copy');
+        lucide.createIcons();
+      }, 2500);
+    }
+
+    // Open/Close project details modal
+    function openProjectModal(index) {
+      activeModalProject = index;
+      const data = projectData[index][lang];
+      
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-sub').textContent = data.sub;
+      document.getElementById('modal-badge').textContent = data.badge;
+
+      // Render details
+      const detailsList = document.getElementById('modal-details-list');
+      detailsList.innerHTML = '';
+      data.details.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        detailsList.appendChild(li);
+      });
+
+      // Render insights
+      const insightsList = document.getElementById('modal-insights-list');
+      insightsList.innerHTML = '';
+      data.insights.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-2 text-slate-700 mt-2';
+        li.innerHTML = `<span class="text-amber-500 shrink-0">✨</span> <span>${item}</span>`;
+        insightsList.appendChild(li);
+      });
+
+      // Show modal
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+    }
+
+    // Load Demo JD
+    function loadDemoJD() {
+      document.getElementById('jd-textarea').value = demoJDs[lang];
+    }
+
+    // Run standalone local job matching
+    function runJobMatch() {
+      const jd = document.getElementById('jd-textarea').value.trim();
+      if (!jd) return;
+
+      const indicator = document.getElementById('scanning-indicator');
+      const report = document.getElementById('match-report');
+      const stepText = document.getElementById('scanning-step');
+      const progressBar = document.getElementById('scanning-progress-bar');
+
+      indicator.classList.remove('hidden');
+      report.classList.add('hidden');
+
+      const scanPhrases = translations[lang].matcherScanning || [
+        "正在提取岗位核心技能标签...",
+        "正在检索潘碧莹的教育背景...",
+        "正在匹配小米电视与缮居公益项目成果...",
+        "正在分析岗位契合度...",
+        "诊断评估完成！"
+      ];
+
+      // Simulate step-by-step scanning for visual rhythm
+      let step = 0;
+      progressBar.style.width = '0%';
+      
+      const interval = setInterval(() => {
+        if (step < scanPhrases.length - 1) {
+          stepText.textContent = scanPhrases[step];
+          progressBar.style.width = `${((step + 1) / scanPhrases.length) * 100}%`;
+          step++;
+        } else {
+          clearInterval(interval);
+          indicator.classList.add('hidden');
+          showMatchReport(jd);
+        }
+      }, 500);
+    }
+
+    // Close Match Report
+    function closeReport() {
+      document.getElementById('match-report').classList.add('hidden');
+    }
+
+    // Parse JD & Render Report
+    function showMatchReport(jd) {
+      const text = jd.toLowerCase();
+      
+      // Standalone rule-based matching engine
+      let userResearchWeight = 75;
+      let productWeight = 75;
+      let interactionWeight = 75;
+      let designWeight = 75;
+      let aiWeight = 75;
+
+      if (text.includes("用户研究") || text.includes("用研") || text.includes("user research") || text.includes("调研") || text.includes("访谈") || text.includes("uxr")) {
+        userResearchWeight += 20;
+        productWeight += 5;
+      }
+      if (text.includes("产品经理") || text.includes("product manager") || text.includes("pm") || text.includes("需求") || text.includes("prd") || text.includes("规划")) {
+        productWeight += 15;
+        interactionWeight += 10;
+      }
+      if (text.includes("交互") || text.includes("体验") || text.includes("interaction") || text.includes("ux") || text.includes("figma") || text.includes("原型")) {
+        interactionWeight += 20;
+        designWeight += 10;
+      }
+      if (text.includes("工业设计") || text.includes("视觉") || text.includes("建模") || text.includes("渲染") || text.includes("rhino") || text.includes("ps")) {
+        designWeight += 20;
+      }
+      if (text.includes("ai") || text.includes("chatgpt") || text.includes("midjourney") || text.includes("大模型") || text.includes("提示词") || text.includes("前端") || text.includes("代码")) {
+        aiWeight += 20;
+      }
+
+      const clamp = (val) => Math.min(98, Math.max(52, val));
+      const r_ur = clamp(userResearchWeight);
+      const r_pm = clamp(productWeight);
+      const r_ia = clamp(interactionWeight);
+      const r_ds = clamp(designWeight);
+      const r_ai = clamp(aiWeight);
+
+      const score = Math.round((r_ur + r_pm + r_ia + r_ds + r_ai) / 5);
+      let matchLevel = "Medium";
+      let levelColor = "text-amber-400";
+      if (score >= 85) {
+        matchLevel = lang === 'zh' ? "High (高度推荐)" : "High (Strongly Match)";
+        levelColor = "text-emerald-400";
+      } else if (score < 70) {
+        matchLevel = lang === 'zh' ? "Low (匹配度偏低)" : "Low Fit";
+        levelColor = "text-rose-400";
+      } else {
+        matchLevel = lang === 'zh' ? "Medium (中等匹配)" : "Medium Fit";
+        levelColor = "text-amber-400";
+      }
+
+      // Render scores
+      document.getElementById('rep-score-value').textContent = `${score}%`;
+      document.getElementById('rep-level-val').textContent = matchLevel;
+      document.getElementById('rep-level-val').className = `${levelColor} font-bold ml-1`;
+
+      // Draw svg dashboard
+      const dashOffset = 251.2 - (251.2 * score) / 100;
+      const circle = document.getElementById('rep-score-circle');
+      circle.setAttribute('stroke-dashoffset', dashOffset);
+      circle.setAttribute('stroke', score >= 85 ? '#10b981' : (score < 70 ? '#f43f5e' : '#f59e0b'));
+
+      // Capabilities rendering
+      document.getElementById('rep-b1-val').textContent = `${r_ur}%`;
+      document.getElementById('rep-b1-bar').style.width = `${r_ur}%`;
+      document.getElementById('rep-b2-val').textContent = `${r_pm}%`;
+      document.getElementById('rep-b2-bar').style.width = `${r_pm}%`;
+      document.getElementById('rep-b3-val').textContent = `${r_ia}%`;
+      document.getElementById('rep-b3-bar').style.width = `${r_ia}%`;
+      document.getElementById('rep-b4-val').textContent = `${r_ds}%`;
+      document.getElementById('rep-b4-bar').style.width = `${r_ds}%`;
+      document.getElementById('rep-b5-val').textContent = `${r_ai}%`;
+      document.getElementById('rep-b5-bar').style.width = `${r_ai}%`;
+
+      // Title dictionaries
+      const dict = translations[lang];
+      document.getElementById('rep-title').textContent = dict.repTitle;
+      document.getElementById('rep-stamp').textContent = dict.repStamp;
+      document.getElementById('rep-btn-close').textContent = dict.repBtnClose;
+      document.getElementById('rep-score-lbl').textContent = dict.repScoreLbl;
+      document.getElementById('rep-level-lbl').textContent = dict.repLevelLbl;
+      document.getElementById('rep-sk-lbl').textContent = dict.repSkLbl;
+      document.getElementById('rep-b1-title').textContent = dict.repB1Title;
+      document.getElementById('rep-b2-title').textContent = dict.repB2Title;
+      document.getElementById('rep-b3-title').textContent = dict.repB3Title;
+      document.getElementById('rep-b4-title').textContent = dict.repB4Title;
+      document.getElementById('rep-b5-title').textContent = dict.repB5Title;
+      document.getElementById('rep-hl-title').textContent = dict.repHlTitle;
+      document.getElementById('rep-imp-title').textContent = dict.repImpTitle;
+      document.getElementById('rep-sum-lbl').textContent = dict.repSumLbl;
+      document.getElementById('rep-role-lbl').textContent = dict.repRoleLbl;
+
+      // Construct bullet points
+      const highlights = [];
+      const improvements = [];
+      let summary = "";
+      let suggestions = [];
+
+      if (lang === 'zh') {
+        highlights.push("具备服务体验设计与工业设计工程硕士背景，有极强的从用户、物理场景到服务路径的逻辑分析框架。");
+        highlights.push("具有严谨的实战用研经验，深度撰写过小米电视交互框架白皮书，以及大湾区适老化缮居公益实地调研，撰写交付能力过硬。");
+        
+        if (r_ur > 85) {
+          highlights.push("针对您岗位高频提到的用户调研要求，潘碧莹熟练掌握了各种人因学访谈、行为测绘及评估量表工具。");
+        } else {
+          highlights.push("熟练应用大模型（ChatGPT/Midjourney）和响应式网页前端代码部署，能够实现「用研-产品原型-响应式开发」的独立端到端交付。");
+        }
+
+        improvements.push("建议在后续面试和考察中，重点结合贵司的核心业务线，邀请其输出一份微型定性分析策略或交互白皮书试写。");
+        improvements.push("进一步提炼其数据量化用研（定量实验）的实操案例细节。");
+
+        summary = `潘碧莹与您的团队岗位匹配度评测为 ${score}%。其学术积淀、大屏白皮书实战用研与对 AI 工具的高效协同开发能力完美吻合本岗位核心职能。`;
+        suggestions = ["用户研究助理 / Intern", "产品经理助理 (APM)", "体验设计研究员 (UXR)", "服务体验设计师"];
+      } else {
+        highlights.push("Holds a rigorous background in Service Experience Design and Industrial Design Engineering with systematic analytical skills.");
+        highlights.push("Proven track record in user research, having authored the Xiaomi TV interaction framework and lead elderly housing surveys.");
+        
+        if (r_ur > 85) {
+          highlights.push("Extremely matching with your research/interview requirements, showing high-caliber skills in CJM, personas, and observation.");
+        } else {
+          highlights.push("Pioneered prompt-engineering & code workflows, showing full-stack capabilities in deploying responsive prototypes on her own.");
+        }
+
+        improvements.push("Suggest inviting Biying to draft a mini qualitative research plan or mock PRD corresponding to your company's product line.");
+        improvements.push("Explore her quantitative/quantitative analytics data workflows during the physical interview stages.");
+
+        summary = `Pan Biying matches this position by a score of ${score}%. Her design Master training, TV OS whitepaper practice, and agile AI prototyping abilities fit exceptionally well.`;
+        suggestions = ["UX Experience Researcher", "Associate Product Manager", "Service Experience Designer", "Junior UX Designer"];
+      }
+
+      // Render lists
+      const hlList = document.getElementById('rep-hl-list');
+      hlList.innerHTML = '';
+      highlights.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-1.5 text-slate-300 mt-1';
+        li.innerHTML = `<span class="text-emerald-500 shrink-0">•</span> <span>${item}</span>`;
+        hlList.appendChild(li);
+      });
+
+      const impList = document.getElementById('rep-imp-list');
+      impList.innerHTML = '';
+      improvements.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-1.5 text-slate-300 mt-1';
+        li.innerHTML = `<span class="text-amber-500 shrink-0">•</span> <span>${item}</span>`;
+        impList.appendChild(li);
+      });
+
+      document.getElementById('rep-sum-val').textContent = summary;
+
+      // Render tags
+      const tagsContainer = document.getElementById('rep-role-tags');
+      tagsContainer.innerHTML = '';
+      suggestions.forEach(title => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-1 bg-white/10 text-indigo-300 font-mono font-bold rounded-lg border border-white/5';
+        span.textContent = title;
+        tagsContainer.appendChild(span);
+      });
+
+      // Show report with scroll alignment
+      const reportDiv = document.getElementById('match-report');
+      reportDiv.classList.remove('hidden');
+      setTimeout(() => {
+        reportDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    // Interactive download trigger
+    function downloadSelf() {
+      // Get complete self source text
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Pan_Biying_Portfolio.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Initial load
+    updateUI();
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Panbiying Portfolio",
+  "description": "个人作品集展示网站，展示教育背景、项目经历、技能特长及AI岗位匹配器。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
